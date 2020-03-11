@@ -1,5 +1,7 @@
 package com.fr.adaming.controller;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,14 +14,14 @@ import com.fr.adaming.dto.UserDto;
 import com.fr.adaming.service.IUserService;
 
 @RestController
+// SuperAdmin
 public class GestionUserController implements IGestionUserController {
 
 	@Autowired
 	private IUserService service;
 
-	// SuperAdmin
 	@Override
-	public ResponseEntity<ResponseDto> create(UserCreateDto dto) {
+	public ResponseEntity<ResponseDto> create(@Valid UserCreateDto dto) {
 		ResponseDto resp = null;
 
 		UserCreateDto dtoResp = UserConverter

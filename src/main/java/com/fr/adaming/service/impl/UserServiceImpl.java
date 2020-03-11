@@ -18,6 +18,10 @@ public class UserServiceImpl implements IUserService {
 	@Override
 	public User create(User user) {
 		// TODO vérifier le retour si jamais la création n'a pas eu lieu
+		
+		if(dao.existsByEmail(user.getEmail())) {
+			return null;
+		}
 		return dao.save(user);
 	}
 
@@ -39,7 +43,7 @@ public class UserServiceImpl implements IUserService {
 	@Override
 	public boolean update(User user) {
 
-		if (user == null || !dao.existsById(user.getId())) {
+		if (user == null || !dao.existsById(user.getId()) || dao.existsByEmail(user.getEmail())) {
 			// l'utilisateur n'existe pas
 			return false;
 		} else {

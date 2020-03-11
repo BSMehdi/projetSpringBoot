@@ -22,9 +22,10 @@ public class User {
 	
 	private String prenom;
 	
-	@Column(unique = true)
+	@Column(unique = true, nullable = false)
 	private String email;
-	
+
+	@Column(nullable = false)
 	private String pwd;
 	
 	private boolean activated = false;

@@ -7,5 +7,7 @@ import com.fr.adaming.entity.User;
 public interface IUserDao extends JpaRepository<User, Integer> {
 
 	public User findByEmail(String email);
+	
+	public boolean existsByEmail(String email);
 
 }
