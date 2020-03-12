@@ -3,6 +3,7 @@ package com.fr.adaming.service.impl;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import com.fr.adaming.dao.IUserDao;
@@ -17,12 +18,15 @@ public class UserServiceImpl implements IUserService {
 
 	@Override
 	public User create(User user) {
-		// TODO vérifier le retour si jamais la création n'a pas eu lieu
-		
-		if(dao.existsByEmail(user.getEmail())) {
+		try {
+			if(user == null || dao.existsByEmail(user.getEmail())) {
+				return null;
+			}
+			return dao.save(user);
+		}catch (DataIntegrityViolationException e) {
+			e.printStackTrace();
 			return null;
 		}
-		return dao.save(user);
 	}
 
 	@Override
